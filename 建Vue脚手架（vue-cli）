@@ -37,7 +37,7 @@
   3. cd 命令进入创建的工程目录，首先cd exprice（这里是自己建工程的名字）；
   4. 安装项目依赖：npm install，因为自动构建过程中已存在package.json文件，所以这里直接安装依赖就行。不要从国内镜像cnpm安装(会导致后面缺了很多依赖库)，但是但是如果真的安装“个把”小时也没成功那就用：cnpm install 吧
   5. 安装 vue 路由模块 vue-router 和网络请求模块 vue-resource，输入：cnpm install vue-router vue-resource --save。
-  6. 启动项目，输入：npm run dev。服务启动成功后浏览器会默认打开一个“欢迎页面”，如下图：
+  6. 启动项目，输入：npm run dev。服务启动成功后浏览器会默认打开一个“欢迎页面”
   
   
   
