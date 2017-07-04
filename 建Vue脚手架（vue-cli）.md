@@ -3,4 +3,4 @@
 ![Alt text](img/fe7726909c64.png)
 
 
-![](https://github.com/liuxiuqian/note1/blob/master/img/fe7726909c64.png)
+![](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/fe7726909c64.png)
