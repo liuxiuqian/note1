@@ -19,7 +19,6 @@
 
 
 
-
 - $ vue init webpack exprice --------------------- 这个是那个安装vue脚手架的命令
 - This will install Vue 2.x version of the template. --------这里说明将要创建一个vue 2.x版本的项目
 - For Vue 1.x use: vue init webpack#1.0 exprice
