@@ -62,3 +62,5 @@
 ###   1. 启动项目，输入：npm run dev。服务启动成功后浏览器会默认打开一个“欢迎页面”，如下图：
 ![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/8.png)
 #### 注意：这里是默认服务启动的是本地的8080端口，所以请确保你的8080端口不被别的程序所占用。
+
+#### 感谢 http://www.jianshu.com/p/1626b8643676
