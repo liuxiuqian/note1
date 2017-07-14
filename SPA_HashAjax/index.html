@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/wealth.css"/>
+		<link rel="stylesheet" type="text/css" href="css/ico.css"/>
+		<link rel="stylesheet" type="text/css" href="css/dropload.css"/>
+		<link rel="stylesheet" type="text/css" href="css/red.css"/>
+		<script src="js/remBase.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="js/template.js" type="text/javascript" charset="utf-8"></script>-->
+		
+	</head>
+	<body>
+  	<div class="container">
+  	  <!--头部-->
+  		<header class="head">
+        <h1><span class="magnifier iconfont icon-jiantou1"></span>有奖排行</h1>
+      </header>
+      <!--导航栏-->
+      <div class="up">
+      	<nav class="nav">
+          <ul class="nav-ul">
+            <li id="wealth">财富榜</li>
+            <li id="profit">盈利榜</li>
+            <li id="redound">回报榜</li>
+            <li id="peptide">胜率榜</li>
+          </ul>
+        </nav>
+        <div class="out">
+         
+        </div>
+      </div>
+      
+  	</div>
+  	<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+  	<script src="js/hash.js" type="text/javascript" charset="utf-8"></script>
+  	<script src="js/dropload.js" type="text/javascript" charset="utf-8"></script>
+  	<script>
+//	添加默认第一个背景颜色
+  	  $(".nav-ul li").eq(0).addClass("bg");
+//	  页面切换
+      $('.nav-ul').on('tap','li',function(){
+        var ur=$(this).attr('id');
+        $(".nav-ul").children().removeClass("bg");
+        $(this).addClass("bg");
+        window.location.hash="#url=page/"+ur;
+      });
+//弹层数据加载
+    $(".out").on("click",".substance1",function(e){
+      var uid = $(this).attr('attr');
+      $(".masking").toggleClass("block");
+      $(".xinxi").toggleClass("block");
+      $.ajax({
+        type:"get",
+        dataType:"json",
+        url:"http://www.buyinball.com/forum/api/user/qry_user_info?user_no="+uid+"",
+        success:function(data){
+          var val = data['qry_user_info'];
+          var str = '';
+          val.signature = val.signature || "这家伙很懒,啥也没说 " ;
+            str = '<img class="xinxi-tou" src="'+val.portrait_pic+'">'+
+            '<span class="quxiao iconfont icon-quxiao"></span>'+
+            '<h1>'+val.nick_name+'<span class="paihang iconfont icon-paixing"> '+val.rank+'</span><span class="gold iconfont icon-jinbi">&nbsp;'+val.coin+'</span></h1>'+
+            '<p class="text iconfont icon-gexingqianming1">&nbsp;'+val.signature+'</p>'+
+            '<p class="bangci"><span class="spa spa1"></span> 周回报榜 ×3<span class="spa spa2"></span> 周胜率榜 ×4</p>'+
+            '<div class="btnrq">'+
+              '<span  class="btn btn1">赠送</span>'+
+              '<span  class="btn btn2">+ 关注</span>'+
+            '</div>'+
+            '<div class="shuju week">'+
+              '<div class="zhou">本周</div>'+
+              '<ul class="shujuul">'+
+                '<li>'+val.record[0].win+'赢 '+val.record[0].draw+'平 '+val.record[0].lost+'输</li>'+
+                '<li>胜率 '+val.record[0].win_rate+'%</li>'+
+                '<li>盈利 '+val.record[0].balance+'</li>'+
+                '<li> 回报 '+val.record[0].repay_rate+'%</li>'+
+              '</ul>'+
+            '</div>'+
+            '<div class="shuju moon">'+
+              '<div class="zhou">上周</div>'+
+              '<ul class="shujuul">'+
+                '<li>'+val.record[1].win+'赢 '+val.record[1].draw+'平 '+val.record[1].lost+'</li>'+
+                '<li>胜率 '+val.record[1].win_rate+'%</li>'+
+                '<li>盈利 '+val.record[1].balance+'</li>'+
+                '<li>回报 '+val.record[1].repay_rate+'%</li>'+
+              '</ul>'+
+            '</div>'
+           $(".xinxi").html(str); 
+        }
+      });
+    })
+//  关闭弹层
+    $(".out").on("click",".quxiao",function(e){
+      $(".masking").toggleClass("block");
+      $(".xinxi").toggleClass("block");
+      $(".xinxi").html(" ");
+    })
+
+//下拉刷新
+  $(function(){
+    // dropload
+    $('.up').dropload({
+        scrollArea : window,
+        loadUpFn : function(me){
+          $.ajax({
+            type:"get",
+            dataType:"json",
+            url:"http://www.buyinball.com/web/services/user/orderRank.json?cur_page=0&per_page_num=10",
+            success:function(data){
+              var arr = data['res_data'];
+              var str = "";
+              for(i in arr){
+                str +='<tr class="substance1" attr='+arr[i].client_id+'>'+
+                        '<td>'+arr[i].rank_num+'</td>'+
+                        '<td><img class="tou" src="'+arr[i].user_avatar+'"/></td>'+
+                        '<td>'+arr[i].nick_name+'</td>'+
+                        '<td>'+arr[i].balance+'</td>'+
+                      '</tr>'
+              }
+             
+            // 为了测试，延迟1秒加载
+            setTimeout(function(){
+                $('.table').html(str);
+                // 每次数据加载完，必须重置
+                me.resetload();
+            },1000);
+        },
+        error: function(xhr, type){
+            alert('Ajax error!');
+            // 即使加载出错，也得重置
+            me.resetload();
+        }
+      });
+    },   
+    threshold:50
+  })  
+});
+    </script>
+
+	</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script src="../js/remBase.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>
+   <!--回报榜-->
+    <div class="content4">
+      <div class="date date1">
+        <!--<span class="text2">上周(05.23-05.30)</span>
+        <span class="iconfont icon-jiantou"></span>-->
+      </div>
+      <div class="date date2">
+        <!--<span class="iconfont icon-jiantou1"></span>
+        <span class="text2">本周(05.30-06.06)</span>-->
+      </div>
+    </div>
+    <div class="title">
+      <span class="tilte1">排行</span>
+      <span class="tilte2">奖品</span>
+    </div>
+    <div class="substance">
+      
+    </div>
+    <div class="masking"></div>
+    <div class="xinxi">
+     
+    </div>
+  <script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+//    先清除缓存
+    localStorage.clear();
+//  一分钟清除缓存重新加载数据
+    setInterval(function(){
+      localStorage.clear();
+      record(1);
+    },60000);
+//  加载默认选项第一个
+    record(1);
+//  本周或上周事件
+    $(".date1").tap(function(){
+      $(this).hide();
+      $(".date2").show();
+      record(1);
+    })
+    $(".date2").tap(function(){
+      $(this).hide();
+      $(".date1").show();
+      record(2);
+    })
+//  ajax获取数据
+    function record(num){
+      if(!localStorage.data1 || !localStorage.data2){
+        $.ajax({
+          type:"get",
+          dataType:"json",
+          url:'http://www.buyinball.com/web/services/user/rank/1?week='+num+'',
+          success:function(data){
+            localStorage.setItem('data'+num,JSON.stringify(data));
+            s = num == 1 ? JSON.parse(localStorage.data1) : JSON.parse(localStorage.data2);
+            addStr(s,num);
+          }
+        });
+      }else{
+        s = num == 1 ? JSON.parse(localStorage.data1) : JSON.parse(localStorage.data2);
+        addStr(s,num);
+      }
+    }
+    
+//  列表字符串拼接
+    function addStr(s ,num){
+      var val = s['res_data'];
+      var str = "";
+      var str1 = "";
+      var arr = val.value.list;
+      var ework = val.value.eWeek;
+      var sWeek = val.value.sWeek;
+      var nDate2 = new Date(ework);   //直接将毫秒数当参数传进去。
+      var month2 = nDate2.getMonth()+1
+      var day2 = nDate2.getDate();
+      
+      var nDate1 = new Date(sWeek);   //直接将毫秒数当参数传进去。
+      var month1 = nDate1.getMonth()+1
+      var day1 = nDate1.getDate();
+      
+      month1 = month1<10 ? "0"+month1 : month1;
+      day1 = (day1 < 10) ? "0"+day1:day1;
+      
+      month2 = month2<10 ? "0"+month2 : month2;
+      day2 = (day2 < 10) ? "0"+day2:day2;
+      if(num == 2){
+         str1 ='<span class="text2">上周('+month1+'.'+day1+'-'+month2+'.'+day2+')</span>'+
+      '<span class="iconfont icon-jiantou"></span>'
+      $(".date1").html(str1)
+      }else if(num == 1){
+        str1 ='<span class="iconfont icon-jiantou1"></span>'+
+              '<span class="text2">本周('+month1+'.'+day1+'-'+month2+'.'+day2+')</span>'
+        $(".date2").html(str1)
+      }
+      for(i in arr){
+        str +=  '<div class="substance1" attr='+arr[i].USER_ID+'>'+
+                  '<span >'+arr[i].RANK+'</span>'+
+                  '<img src="'+arr[i].uPic+'"/>'+
+                  '<div>'+
+                    '<h1>'+arr[i].uName+'</h1>'+
+                    '<a>盈利：'+arr[i].RANK_VAL+'</a>'+
+                  '</div>'+
+                  '<p>'+arr[i].aName+'</p>'+
+                '</div>'
+      }
+      $(".substance").html(str);
+    }
+    
+
+  </script>
+  </body>
+  
+</html>

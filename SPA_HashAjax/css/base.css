@@ -1,0 +1,31 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+html,body{height: 100%;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,input,select,option,p,th,td{-webkit-tap-highlight-color:rgba(0,0,0,0)}
+body{font:12px/1.5 Avenir,Heiti-SC,Monaco,tahoma, arial, \5b8b\4f53, sans-serif;-webkit-text-size-adjust:none; -webkit-user-select: none;}
+i,b,em{font-style:normal; font-weight:normal}
+img{border:0;vertical-align: middle;}
+table{border-collapse:collapse;border-spacing:0}
+li,ol,ul{list-style-type:none;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;font-size:100%;}
+input,select,textarea{font-size:12px;}
+input:focus{outline:none}
+.inline{display:inline-block;display:-moz-inline-stack;*display:inline;zoom:1;}
+.fl{float:left; display:inline;}
+.fr{float:right;display:inline;}
+.clearfix{ clear:both;overflow:hidden;}
+.clearfix:after{clear: both;content: "";display: block;height: 0;visibility: hidden;}
+.hide{display:none;}
+.mt10{margin-top: 10px;}
+.mt20{margin-top: 20px;}
+.tc{ text-align:center;}
+.tr{ text-align:right;}
+.tl{ text-align:left;}
+.box-flex{display: -ms-flexbox; display: -webkit-box;}
+.box-flex-item{-webkit-box-flex: 1; -ms-flex: 1 auto;width: 1px;display: block;}
+.unVisible{visibility:hidden;}
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button{
+-webkit-appearance: none;
+}

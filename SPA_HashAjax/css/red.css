@@ -1,0 +1,70 @@
+.date {
+  height: .3rem;
+  background: #e8edef;
+  text-align: center; }
+
+.date1 {
+  display: none; }
+
+.title {
+  height: .3rem;
+  background: #f9f9f9; }
+  .title span {
+    text-align: center;
+    height: .3rem;
+    line-height: .3rem;
+    display: inline-block;
+    color: #ff5b06; }
+  .title .tilte1 {
+    width: 60%;
+    text-align: left;
+    padding-left: .6rem;
+    box-sizing: border-box; }
+  .title .tilte2 {
+    width: 30%;
+    padding-left: .2rem;
+    box-sizing: border-box; }
+
+.substance1 {
+  height: .6rem;
+  background: #e8edef; }
+  .substance1 span {
+    display: inline-block;
+    text-align: right;
+    height: .6rem;
+    line-height: .6rem;
+    width: .45rem; }
+  .substance1 img {
+    width: .35rem;
+    height: .35rem;
+    margin-left: .15rem;
+    border-radius: .35rem; }
+  .substance1 div {
+    display: inline-block;
+    width: 1.5rem;
+    height: .6rem; }
+  .substance1 h1, .substance1 a {
+    position: relative;
+    width: 1.5rem;
+    top: .1rem;
+    left: .1rem;
+    display: inline-block; }
+  .substance1 h1 {
+    font-size: .16rem; }
+  .substance1 a {
+    color: #8f9090; }
+  .substance1 p {
+    width: 1.3rem;
+    height: .6rem;
+    line-height: .6rem;
+    text-align: center;
+    float: right;
+    color: #ff5b06; }
+
+.substance1:nth-child(2n) {
+  background: #f9f9f9; }
+
+.substance1:nth-child(2n+1) {
+  background: #e8edef; }
+
+/*# sourceMappingURL=red.css.map */

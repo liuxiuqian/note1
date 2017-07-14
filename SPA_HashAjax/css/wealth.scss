@@ -1,0 +1,53 @@
+
+body{
+  font-size: .12rem;
+}
+$orangeColor: #ff5b06;
+$border: 1px solid #ff5b06;
+$radius: .05rem;
+$white: #fff;
+$gray:#ebeef0;
+$ta:#f9f9f9;
+$black:#000;
+
+.table{
+    
+  width: 100%;
+  text-align: center;
+  color: $orangeColor;
+  .table-head{
+    height: .28rem;
+    background: $ta;
+    
+  }
+  tr{
+    height: .55rem;
+    td{
+        height: .55rem;
+    }
+    
+    td:first-child{
+        width: .5rem;
+        text-align: right;
+    }
+    td:nth-child(2){
+      width: .5rem;
+      text-align: right;
+    }
+    td:nth-child(3){
+      width: 1.5rem;
+      text-align: left;
+      padding-left: 0.1rem;
+      box-sizing: border-box;
+      font-size: .16rem;
+      color: $black;
+    }
+    
+  }
+  tr:nth-child(2n){
+    background: $gray;
+  }
+  tr:nth-child(2n+1){
+    background: $ta;
+  }    
+}

@@ -1,0 +1,199 @@
+body {
+  font-size: .12rem; }
+
+.head {
+  height: .5rem;
+  width: 100%;
+  background: #ff5b06;
+  position: relative;
+  line-height: .5rem;
+  text-align: center;
+  color: #fff;
+  position: fixed;
+  top: 0; }
+  .head h1 {
+    font-size: .18rem; }
+  .head .magnifier {
+    position: absolute;
+    left: .15rem; }
+
+.up {
+  margin-top: 0.5rem; }
+
+.nav {
+  width: 100%;
+  height: .6rem;
+  background: #ebeef0; }
+
+.nav-ul {
+  width: 70%;
+  margin: auto 15%;
+  font-size: 0;
+  text-align: center; }
+  .nav-ul li {
+    display: inline-block;
+    width: 24%;
+    height: .3rem;
+    font-size: .14rem;
+    color: #ff5b06;
+    line-height: .3rem;
+    margin-top: .15rem;
+    border-top: 1px solid #ff5b06;
+    border-bottom: 1px solid #ff5b06; }
+  .nav-ul li:first-child {
+    border-radius: 0.05rem 0 0 0.05rem;
+    border-left: 1px solid #ff5b06;
+    border-right: 1px solid #ff5b06; }
+  .nav-ul li:last-child {
+    border-radius: 0 0.05rem 0.05rem 0;
+    border-left: 1px solid #ff5b06;
+    border-right: 1px solid #ff5b06; }
+  .nav-ul li:nth-child(2) {
+    border-right: 1px solid #ff5b06; }
+
+.tou {
+  height: .35rem;
+  width: .35rem;
+  border-radius: 0.35rem; }
+
+.masking {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none; }
+
+.xinxi {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -1.685rem;
+  margin-left: -1.685rem;
+  width: 3.39rem;
+  height: 3.39rem;
+  background: #eceff1;
+  border-radius: 0.05rem 0.05rem 0 0;
+  display: none; }
+  .xinxi .quxiao {
+    position: absolute;
+    right: .1rem;
+    top: .1rem;
+    font-size: .2rem; }
+  .xinxi h1 {
+    margin-top: .5rem;
+    font-size: .2rem;
+    text-align: center;
+    font-weight: bold; }
+    .xinxi h1 .paihang {
+      font-size: .16rem;
+      margin-left: .1rem;
+      color: #8f9090;
+      font-weight: normal; }
+    .xinxi h1 .gold {
+      font-size: .16rem;
+      margin-left: .1rem;
+      font-weight: normal;
+      color: #8f9090; }
+  .xinxi .text {
+    color: #8f9090;
+    text-align: center;
+    height: .4rem;
+    line-height: .4rem;
+    font-size: .14rem; }
+  .xinxi .bangci {
+    height: .25rem;
+    text-align: center;
+    color: #8f9090; }
+  .xinxi .spa {
+    height: .27rem;
+    width: .25rem;
+    display: inline-block;
+    background: url(../img/ico.png) no-repeat 0.06rem 0.02rem;
+    background-size: .5rem;
+    position: relative;
+    top: .03rem; }
+  .xinxi .spa2 {
+    background-position-x: -0.2rem; }
+  .xinxi .btnrq {
+    display: inline-block;
+    width: 100%;
+    height: .55rem;
+    margin-top: .2rem;
+    text-align: center; }
+  .xinxi .btn {
+    width: 1.25rem;
+    display: inline-block;
+    height: .3rem;
+    line-height: .3rem;
+    border-radius: 0.2rem;
+    color: #fff;
+    font-size: .14rem;
+    background: #ff5b06; }
+  .xinxi .btn:active {
+    background: #8f9090; }
+  .xinxi .btn2 {
+    margin-left: .1rem; }
+  .xinxi .week {
+    position: relative; }
+  .xinxi .week:after {
+    content: "";
+    width: 90%;
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    display: inline-block;
+    border: 1px solid #ebeef0; }
+  .xinxi .shuju {
+    height: .6rem;
+    background: #fff;
+    position: relative; }
+    .xinxi .shuju .zhou {
+      position: absolute;
+      top: .1rem;
+      left: .3rem;
+      width: .3rem;
+      height: .15rem;
+      text-align: center;
+      border: 1px solid #8f9090;
+      line-height: .15rem;
+      color: #8f9090; }
+  .xinxi .shujuul {
+    height: .6rem;
+    width: 70%;
+    margin: 0 auto;
+    padding-left: 0.4rem; }
+    .xinxi .shujuul li {
+      display: inline-block;
+      height: .3rem;
+      line-height: .3rem;
+      text-align: left;
+      font-size: .12rem;
+      padding-left: .1rem;
+      box-sizing: border-box;
+      color: #8f9090;
+      width: 48%; }
+    .xinxi .shujuul li:nth-child(2) {
+      color: red;
+      padding-left: .4rem; }
+    .xinxi .shujuul li:nth-child(4) {
+      padding-left: .4rem; }
+
+.xinxi-tou {
+  height: .5rem;
+  width: .5rem;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  position: absolute;
+  left: 50%;
+  margin-top: -.25rem;
+  margin-left: -.25rem; }
+
+.bg {
+  background: #ff5b06;
+  color: #fff !important; }
+
+.block {
+  display: block; }
+
+/*# sourceMappingURL=style.css.map */

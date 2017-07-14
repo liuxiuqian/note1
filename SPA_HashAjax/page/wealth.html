@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<!--<link rel="stylesheet" type="text/css" href="../css/dropload.css"/>-->
+		<script src="../js/remBase.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../js/template.js" type="text/javascript" charset="utf-8"></script>-->
+		
+	</head>
+	<body>
+   <!--财富榜-->
+    <div class="entry">
+    	<table class="substance table">
+        <tr class="table-head"><th colspan="3">排名</th><th>游戏币</th></tr>
+    </table>
+    </div>   
+ 	  
+    <div class="masking"></div>
+    <div class="xinxi">
+      	
+    </div>
+  <script type="text/javascript">
+//    先清除缓存
+    localStorage.clear();
+//  一分钟清除缓存重新加载数据
+    setInterval(function(){
+      localStorage.clear();
+      ajx();
+    },60000);
+//  加载默认选项第一个
+    ajx();
+//ajax获取数据
+    function ajx(){
+      if(!localStorage.data){
+        $.ajax({
+          type:"get",
+          dataType:"json",
+          url:"http://www.buyinball.com/web/services/user/orderRank.json?cur_page=0&per_page_num=10",
+          success:function(data){
+            localStorage.setItem('data',JSON.stringify(data));
+            val01 = JSON.parse(localStorage.data);
+            addstr1(val01);
+          }    
+        });
+      }else{
+        val01 = JSON.parse(localStorage.data);
+        addstr1(val01);
+      }
+    }
+//	加载dom元素
+  	function addstr1(val01){
+  	  var arr = val01['res_data'];
+      var str = "";
+      for(i in arr){
+        str +='<tr class="substance1" attr='+arr[i].client_id+'>'+
+                '<td>'+arr[i].rank_num+'</td>'+
+                '<td><img class="tou" src="'+arr[i].user_avatar+'"/></td>'+
+                '<td>'+arr[i].nick_name+'</td>'+
+                '<td>'+arr[i].balance+'</td>'+
+              '</tr>'
+      }
+      $(".substance").append(str);
+  	}
+//	上拉加载数据
+    $(function() {
+      var n = 1;
+      $('.entry').dropload({
+        scrollArea: window,
+        loadDownFn: function(me) {
+            $.ajax({
+              type: "get",
+              dataType: "json",
+              url: "http://www.buyinball.com/web/services/user/orderRank.json?cur_page=" + n + "&per_page_num=10",
+              success: function(data) {
+  
+                var arr = data['res_data'];
+                var str = "";
+                for (i in arr) {
+                  str += '<tr attr=' + arr[i].client_id + '>' +
+                    '<td>' + arr[i].rank_num + '</td>' +
+                    '<td><img class="tou" src="' + arr[i].user_avatar + '"/></td>' +
+                    '<td>' + arr[i].nick_name + '</td>' +
+                    '<td>' + arr[i].balance + '</td>' +
+                    '</tr>'
+                }
+                // 为了测试，延迟1秒加载
+                setTimeout(function() {
+                  $(".table").append(str);
+                  // 每次数据加载完，必须重置
+                  me.resetload();
+                }, 1000);
+              },
+              error: function(xhr, type) {
+                alert('Ajax error!');
+                // 即使加载出错，也得重置
+                me.resetload();
+              }
+            });
+          n++;
+          if(n >9){
+            // 锁定
+            me.lock();
+            // 无数据
+            me.noData();
+          } 
+        }
+      });
+    });
+
+  </script>
+	</body>
+</html>

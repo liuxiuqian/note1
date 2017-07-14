@@ -1,0 +1,33 @@
+body {
+  font-size: .12rem; }
+
+.table {
+  width: 100%;
+  text-align: center;
+  color: #ff5b06; }
+  .table .table-head {
+    height: .28rem;
+    background: #f9f9f9; }
+  .table tr {
+    height: .55rem; }
+    .table tr td {
+      height: .55rem; }
+    .table tr td:first-child {
+      width: .5rem;
+      text-align: right; }
+    .table tr td:nth-child(2) {
+      width: .5rem;
+      text-align: right; }
+    .table tr td:nth-child(3) {
+      width: 1.5rem;
+      text-align: left;
+      padding-left: 0.1rem;
+      box-sizing: border-box;
+      font-size: .16rem;
+      color: #000; }
+  .table tr:nth-child(2n) {
+    background: #ebeef0; }
+  .table tr:nth-child(2n+1) {
+    background: #f9f9f9; }
+
+/*# sourceMappingURL=wealth.css.map */

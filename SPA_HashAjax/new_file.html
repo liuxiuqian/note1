@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	var obj = {
+		user_id:1
+	}
+		$.ajax({
+			type:"post",
+			data:obj,
+			dataType:"json",
+			url:"http://112.74.131.10/tiduihulian/share/project/jl/jlphp/yoga/frontend/web/index.php?r=course/inde&sign=f809f3967bbfed5a3aa55be22789f87c&user_id=1",
+			async:true,
+			success:function(e){
+				console.log(e);
+			}
+		});
+	</script>
+</html>

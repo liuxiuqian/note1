@@ -1,0 +1,87 @@
+
+
+$huise:#e8edef;
+$f9:#f9f9f9;
+$orange:#ff5b06;
+$maskcolor:#8f9090;
+.date{
+    height: .3rem;
+    background: $huise;
+    text-align: center;
+}
+.date1{
+  display: none;
+}
+.title{
+  height: .3rem;
+  background: $f9;
+  span{
+    text-align: center;
+    height: .3rem;
+    line-height: .3rem;
+    display: inline-block;
+    color: $orange;
+  }
+  .tilte1{
+      width: 60%;
+      text-align: left;
+      padding-left: .6rem;
+      box-sizing: border-box;
+  }
+  .tilte2{
+      width: 30%;
+      padding-left: .2rem;
+      box-sizing: border-box;
+  }
+}
+.substance1{
+  height: .6rem;
+  background: $huise;
+  span{
+    display: inline-block;
+    text-align: right;
+    height: .6rem;
+    line-height: .6rem;
+    width: .45rem;
+  }
+  img{
+    width: .35rem;
+    height: .35rem;
+    margin-left: .15rem;
+    border-radius: .35rem;
+  }
+  div{
+    display: inline-block;
+    width: 1.5rem;
+    height: .6rem;
+  }
+  h1,a{
+    position: relative;  
+    width: 1.5rem;
+    top: .1rem;
+    left: .1rem;
+    display: inline-block;
+  }
+  h1{
+    font-size: .16rem;
+  }
+  a{
+    color: $maskcolor;
+  }
+  p{
+    width: 1.3rem;
+    height: .6rem;
+    line-height: .6rem;
+    text-align: center;
+    float: right;
+    color: $orange;
+  }
+}
+.substance1:nth-child(2n){
+    background: $f9;
+  }
+.substance1:nth-child(2n+1){
+    background: $huise;
+  }    
+
+

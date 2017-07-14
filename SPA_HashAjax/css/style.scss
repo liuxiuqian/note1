@@ -1,0 +1,242 @@
+body{
+  font-size: .12rem;
+}
+$orangeColor: #ff5b06;
+$border: 1px solid #ff5b06;
+$radius: .05rem;
+$white: #fff;
+$gray:#ebeef0;
+$ta:#f9f9f9;
+$black:#000;
+$maskcolor:#8f9090;
+$mas:rgba(0,0,0,0.5);
+$red:red;
+.head{
+  height: .5rem;
+  width: 100%;
+  background: $orangeColor;
+  position:relative ;
+  line-height: .5rem;
+  text-align: center;
+  color: $white;
+  position: fixed;
+  top: 0;
+h1{
+  font-size: .18rem;
+}
+.magnifier{
+  position: absolute;
+  left: .15rem;
+}
+  
+}
+.up{
+    margin-top: 0.5rem;
+}
+.nav{
+  width: 100%;
+  height: .6rem;
+  background: $gray;
+//margin-top: 0.5rem;
+}
+.nav-ul{
+width: 70%;
+margin:auto 15%;
+font-size: 0;
+text-align: center;
+li{
+  display: inline-block;
+  width: 24%;
+  height: .3rem;
+  font-size: .14rem;
+  color: $orangeColor;;
+  line-height: .3rem;
+  margin-top: .15rem;
+  border-top: $border;
+  border-bottom: $border;
+}
+li:first-child{
+  border-radius:$radius 0 0 $radius;
+  border-left: $border;
+  border-right: $border;
+}
+li:last-child{
+  border-radius:0 $radius $radius 0;
+  border-left: $border;
+  border-right: $border;
+}
+li:nth-child(2){
+  border-right: $border;
+}
+}
+
+.tou{
+    height: .35rem;
+    width: .35rem;
+    border-radius:.35rem ;
+}
+.masking{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background:$mas;
+    display: none;
+}
+.xinxi{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.685rem;
+    margin-left: -1.685rem;
+    width: 3.39rem;
+    height: 3.39rem;
+    background: #eceff1;
+    border-radius: $radius $radius 0 0 ;
+    display: none;
+  .quxiao{
+    position: absolute;
+    right: .1rem;
+    top: .1rem;
+    font-size: .2rem;
+  }
+  h1{
+      margin-top: .5rem;
+      font-size: .2rem;
+      text-align: center;
+      font-weight: bold;
+      .paihang{
+        font-size: .16rem;
+        margin-left: .1rem;
+        color: $maskcolor;
+        font-weight: normal;
+      }
+      .gold{
+        font-size: .16rem;
+        margin-left: .1rem;
+        font-weight: normal;
+        color: $maskcolor;
+      }
+  }
+  .text{
+      color: $maskcolor;
+      text-align: center;
+      height: .4rem;
+      line-height: .4rem;
+      font-size: .14rem;
+  }
+  .bangci{
+      height: .25rem;
+      text-align: center;
+      color: $maskcolor;
+  }
+  .spa{
+      height: .27rem;
+      width: .25rem;
+      display: inline-block;
+      background: url(../img/ico.png) no-repeat .06rem .02rem;
+      background-size: .5rem;
+      position: relative;
+      top: .03rem;
+  }
+  .spa2{
+      background-position-x:-.2rem ;
+  }
+  .btnrq{
+      display: inline-block;
+      width: 100%;
+      height: .55rem;
+      margin-top: .2rem;
+      text-align: center;
+  }
+  .btn{
+      width: 1.25rem;
+      display: inline-block;
+      height: .3rem;
+      line-height: .3rem;
+      border-radius:.2rem ;
+      color: $white;
+      font-size: .14rem;
+      background: $orangeColor;
+  }
+  .btn:active{
+    background: $maskcolor;
+  }
+  .btn2{
+      margin-left: .1rem;
+     
+  }
+  .week{
+      position: relative;
+  }
+  .week:after{
+      content: "";
+      width: 90%;
+      position: absolute;
+      bottom: 0;
+      left: 5%;
+      display: inline-block;
+      border: 1px solid $gray;
+  }
+  .shuju{
+      height: .6rem;
+      background: $white;
+      position: relative;
+    .zhou{
+      position: absolute;
+      top: .1rem;
+      left: .3rem;
+      width: .3rem;
+      height: .15rem;
+      text-align: center;
+      border: 1px solid $maskcolor;
+      line-height: .15rem;
+      color: $maskcolor;
+    }  
+  }
+  .shujuul{
+      height: .6rem;
+      width: 70%;
+      margin: 0 auto;
+      padding-left:.4rem ;
+    li{
+        display: inline-block;
+        height: .3rem;
+        line-height: .3rem;
+        text-align: left;
+        font-size: .12rem;
+        padding-left: .1rem;
+        box-sizing: border-box;
+        color: $maskcolor;
+        width: 48%;
+    }
+    li:nth-child(2){
+        color: $red;
+        padding-left: .4rem;
+    }
+    li:nth-child(4){
+        padding-left: .4rem;
+    }
+      
+  }
+  
+}
+.xinxi-tou{
+    height: .5rem;
+    width: .5rem;
+    border: 2px solid $white;
+    border-radius:.5rem ;
+    position: absolute;
+    left: 50%;
+    margin-top: -.25rem;
+    margin-left: -.25rem;
+}
+
+
+.bg{
+    background: $orangeColor;
+    color: $white!important;
+}
+.block{
+   display: block;
+}
