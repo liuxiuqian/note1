@@ -41,5 +41,28 @@ Vue 的组件作用域都是孤立的，不允许在子组件的模板内直接�
 
 ![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue6.png)
 
+这是 header.vue 的 HTML 部分，定义一个事件 stulogin  将aaa传递给 home.vue
+
+首先声明一个了方法 stulogin，用 click 事件来调用 stulogin
+
+![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue7.png)
+
+在 stulogin 中，使用了 $emit 来遍历 stlogin 事件，并返回 this.aaa
+
+其中 stlogin 是一个自定义的事件，功能类似于一个中转，this.aaa 将通过这个事件传递给父组件
+
+#### 父组件部分：
+
+![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue8.png)
+
+在父组件 home.vue 中，声明了一个方法 ttttt，用 stlogin 事件调用 ttttt 方法，获取到从子组件传递过来的参数 aaa
+
+![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue9.png)
+
+
+
+
+
+
 
 
