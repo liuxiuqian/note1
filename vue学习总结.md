@@ -26,9 +26,20 @@ Vue 的组件作用域都是孤立的，不允许在子组件的模板内直接�
 
 ![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue4.png)
 
-在调用组件的时候，使用 v-bind 将 dq1 的值绑定为 App.vue 中定义的变量 items
+在调用组件的时候，使用 v-bind 将 dq1 的值绑定为 home.vue 中定义的变量 items
 
 ![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue5.png)
+
+然后就能将home.vue中 items 的值传给 header.vue 了
+
+
+### 2.子组件向父组件传递数据
+
+子组件主要通过事件传递数据给父组件
+
+##### 子组件部分：
+
+![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue6.png)
 
 
 
