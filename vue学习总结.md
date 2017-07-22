@@ -26,4 +26,9 @@ Vue 的组件作用域都是孤立的，不允许在子组件的模板内直接�
 
 ![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue4.png)
 
+在调用组件的时候，使用 v-bind 将 dq1 的值绑定为 App.vue 中定义的变量 items
+
+![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue5.png)
+
+
 
