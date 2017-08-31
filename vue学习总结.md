@@ -59,13 +59,13 @@ Vue 的组件作用域都是孤立的，不允许在子组件的模板内直接�
 
 ![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue9.png)
 
-## 3.子组件向子组件传递数据
+### 3.子组件向子组件传递数据
 
 Vue 没有直接子对子传参的方法，建议将需要传递数据的子组件，都合并为一个组件。如果一定需要子对子传参，可以先从传到父组件，再传到子组件。
 
 为了便于开发，Vue 推出了一个状态管理工具 Vuex，可以很方便实现组件之间的参数传递
 
-### 1.安装并引入 Vuex
+#### 1.安装并引入 Vuex
     
     cnpm install vuex -S
 
@@ -84,7 +84,7 @@ Vue 没有直接子对子传参的方法，建议将需要传递数据的子组�
       render: h => h(App)
     })
 
-### 2.构建核心仓库 store.js
+#### 2.构建核心仓库 store.js
 
 Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以从 store.js 里面获取状态，可以把 store 通俗的理解为一个全局变量的仓库。
 
@@ -111,7 +111,7 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 
 虽然在 main.js 中已经引入了 Vue 和 Vuex，但是这里还得再引入一次
 
-### 3.将状态映射到组件
+#### 3.将状态映射到组件
 
     <template>
       <div id="footer">
@@ -146,7 +146,7 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 
 页面渲染之后，就能获取到 Stulgoin 的值
 
-### 4.在组件中修改状态
+#### 4.在组件中修改状态
 
 然后在 header.vue 中添加事件，将输入框的值传给 store.js 中的 Stulgoin
     
@@ -162,7 +162,7 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 在 stulogin 方法中，事件触发 将 "dddd"赋给 Vuex 中的状态 Stulgoin，从而实现子组件之间的数据传递
 
 
-### 5.官方推荐的修改状态的方式
+#### 5.官方推荐的修改状态的方式
 
 上面的示例是在 stulogin 直接使用赋值的方式修改状态 Stulgoin，但是 vue 官方推荐使用下面的方法是利用mutations
 
