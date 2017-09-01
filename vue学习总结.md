@@ -209,9 +209,16 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 
 #### 1、配置vue-router路由拦截，结合vuex（状态管理器）和localStorage
 
+##### 1、router js配置
 
+###### （1）在需要登录权限的页面路由加上自定义属性requireAuth，用于标记是否有登录权限。
 
-
+    meta: {
+      requireAuth: true
+    }
+如图
+    
+ ![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue21.png)
 
 
 
