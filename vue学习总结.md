@@ -326,6 +326,22 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
     
     export const TITLE = 'title'
 
-###### （3）登录页获取
+###### （3）登录页获取token存储在store中
+
+    if (this.token) {
+	    this.$store.commit("login", this.token)
+	    let redirect = decodeURIComponent(this.$route.query.redirect || '/hello');
+	    this.$router.push({
+	      path: redirect
+	    })
+      }
 
 
+在登录页定义token变量，通过获取后台接口的token值，存储的store中，并上次即将要进入的页面或者'/hello'页。
+
+
+以上工程完成了页面的路由控制，但是没有真正做到拦截，需要结合api接口进行拦截，本文用到的是axios
+
+#### 2、axios拦截
+
+##### 1、
