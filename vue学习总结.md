@@ -246,6 +246,19 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
       }
     })
 
+####### （3）页面刷新时，重新赋值token
+    
+    if (window.localStorage.getItem('token')) {
+      store.commit("login", window.localStorage.getItem('token'))
+    }
+
+###### （4）去除地址栏的 /#/
+
+    mode : 'history',
+
+ ![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue22.png)
+
+
 ##### 2、vuex（状态管理器）配置
 
 ###### （1）store.js配置
@@ -313,6 +326,6 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
     
     export const TITLE = 'title'
 
-
+###### （3）登录页获取
 
 
