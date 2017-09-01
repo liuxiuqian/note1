@@ -220,6 +220,99 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
     
  ![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/vue21.png)
 
+###### （2）router js  进行router.beforeEach拦截配置
+
+    router.beforeEach((to, from, next) => {
+      //解决vue2.0路由跳转未匹配相应用路由避免出现空白页面
+      if (to.matched.length ===0) {//如果未匹配到路由
+    from.name ? next({ name:from.name }) : next('/notfind');   //如果上级也未匹配到路由则跳转notfind页面，如果上级能匹配到则转上级路由
+      } else {
+    next();//如果匹配到正确跳转
+      }
+      //路由拦截
+      if (to.meta.requireAuth) {
+    if (store.state.token) {
+      next();
+    }
+    else {
+      next({
+    path: '/',//返回首页（这里是登录页）
+    query: {redirect: to.fullPath}//登录成功前往上次要去的页面
+      })
+    }
+      }
+      else {
+    next();
+      }
+    })
+
+##### 2、vuex（状态管理器）配置
+
+###### （1）store.js配置
+
+    /**
+     * Created by Administrator on 2017/7/22.
+     */
+    import Vue from 'vue'
+    import Vuex from 'vuex'
+    
+    import * as types from './types'
+    
+    Vue.use(Vuex)
+    
+    const store = new Vuex.Store({
+      // 定义状态
+      state: {
+    token : null,
+    title: ''
+      },
+      mutations:{
+    [types.LOGIN]: (state, data) => {
+      localStorage.token = data;
+      state.token = data;
+    },
+    [types.LOGOUT]: (state) => {
+      localStorage.removeItem('token');
+      state.token = null
+    },
+    [types.TITLE]: (state, data) => {
+      state.title = data;
+    }
+      }
+    })
+    
+    export default store
+
+[types.LOGIN]是在types里定义的变量，方便管理使用。
+
+存数据方法：
+
+    this.$store.commit("login", this.token)
+
+"login"为types.js的变量值，this.token要存的值
+
+取值方法：
+
+    
+    import store from '../vuex/store'
+	
+    store.state.token//使用前要引入storejs文件
+
+获取store中的token值
+
+###### （2）types.js
+    
+    /**
+     * Created by superman on 17/2/16.
+     * vuex types
+     */
+    
+    export const LOGIN = 'login';
+    
+    export const LOGOUT = 'logout';
+    
+    export const TITLE = 'title'
+
 
 
 
