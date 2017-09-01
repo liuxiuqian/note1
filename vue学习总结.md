@@ -205,6 +205,14 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 这样显式地提交(commit) mutations，可以让我们更好的跟踪每一个状态的变化，所以在大型项目中，更推荐使用第二种方法。
 
 ## 2.vue+axios 前端实现登录拦截（路由拦截、http拦截）
-- localStorage存储登录状态，利用vuex（状态管理器）进行判断，利用vue-router提供的钩子函数beforeEach()对路由进行判断。
+- localStorage存储登录状态，利用vuex（状态管理器）进行判断，利用vue-router提供的钩子函数beforeEach()对路由进行判断，axios进行请求http拦截。
+
+#### 1、配置vue-router路由拦截，结合vuex（状态管理器）和localStorage
+
+
+
+
+
+
 
 
