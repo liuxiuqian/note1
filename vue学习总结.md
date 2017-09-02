@@ -417,13 +417,20 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 	    target: 'http://123.57.13.164:8060/sensor',
 	    changeOrigin: true,
 	    pathRewrite: {
-	      '^/list': '/list'
+	      '^/list': '/'
 	    }
       }
 
 使用
 
     export default {
-      login : "/list/user/login",//登录接口地址
+      login : "/user/login",//登录接口地址
     }
-此处的接口地址做封装处理了，前面/list就是上文的“/list”:{},target服务器地址，changeOrigin是否开启跨域（true开启），注意：在使用开发版跨域时要关闭axios配置文件中的axios.defaults.baseURL服务器地址
+此处的接口地址做封装处理了，前面/list就是上文的“/list”:{},target服务器地址，changeOrigin是否开启跨域（true开启），
+
+其中 '/api' 为匹配项，target 为被请求的地址,因为在 ajax 的 url 中加了前缀 '/api'，而原本的接口是没有这个前缀的,所以需要通过 pathRewrite 来重写地址，将前缀 '/api' 转为 '/',如果本身的接口地址就有 '/api' 这种通用前缀，就可以把 pathRewrite 删掉
+
+注意：在使用开发版跨域时要在axios配置文件中的
+
+    axios.defaults.baseURL="/list";
+
