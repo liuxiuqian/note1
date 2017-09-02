@@ -1,3 +1,11 @@
+## 目录
+
+1. 模板之间数据传递
+2. vue+axios 前端实现登录拦截（路由拦截、http拦截）
+3. 配置开发版跨域问题
+
+
+
 ## 1. 模板之间数据传递
 
 
@@ -264,7 +272,7 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 ###### （1）store.js配置
 
     /**
-     * Created by Administrator on 2017/7/22.
+     * Created by 风信子 on 1/9/17
      */
     import Vue from 'vue'
     import Vuex from 'vuex'
@@ -316,7 +324,7 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 ###### （2）types.js
     
     /**
-     * Created by superman on 17/2/16.
+     * Created by 风信子 on 1/9/17
      * vuex types
      */
     
@@ -400,3 +408,22 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 
 接口请求的配置，发送拦截和接收拦截。
 
+
+## 3、配置开发版跨域问题
+
+在config下的index.js中的dev 设置proxyTable
+
+    '/list': {
+	    target: 'http://123.57.13.164:8060/sensor',
+	    changeOrigin: true,
+	    pathRewrite: {
+	      '^/list': '/list'
+	    }
+      }
+
+使用
+
+    export default {
+      login : "/list/user/login",//登录接口地址
+    }
+此处的接口地址做封装处理了，前面/list就是上文的“/list”:{},target服务器地址，changeOrigin是否开启跨域（true开启），注意：在使用开发版跨域时要关闭axios配置文件中的axios.defaults.baseURL服务器地址
