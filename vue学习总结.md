@@ -3,6 +3,7 @@
 1. 模板之间数据传递
 2. vue+axios 前端实现登录拦截（路由拦截、http拦截）
 3. 配置开发版跨域问题
+4. 设置页面title
 
 
 
@@ -434,3 +435,23 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 
     axios.defaults.baseURL="/list";
 
+## 4、设置页面title
+
+在路由里每个都添加一个meta
+
+    [
+      {
+     path:'',
+     meta: {
+       title: '首页'
+     },
+     component:''
+       }
+    ]
+
+钩子函数
+    
+    router.beforeEach((to, from, next) => {
+      window.document.title = to.meta.title;//设置页面title
+      next();
+    })
