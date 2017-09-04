@@ -4,6 +4,7 @@
 2. vue+axios 前端实现登录拦截（路由拦截、http拦截）
 3. 配置开发版跨域问题
 4. 设置页面title
+5. 分页处理数据
 
 
 
@@ -455,3 +456,14 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
       window.document.title = to.meta.title;//设置页面title
       next();
     })
+
+
+## 5、分页处理数据
+
+### 1、数据展示和分页在同一个页面
+
+1. 首先需要在vue-cli项目中配置bootstrap,jquery
+2. 然后新建vue文件,如index.vue，index.vue内容如下
+3. 配置路由即可运行实现。
+
+  
