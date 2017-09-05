@@ -466,4 +466,4 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 2. 然后新建vue文件,如index.vue，index.vue内容如下
 3. 配置路由即可运行实现。
 
-  
+
