@@ -1,4 +1,4 @@
-## 目录
+﻿## 目录
 
 1. 模板之间数据传递
 2. vue+axios 前端实现登录拦截（路由拦截、http拦截）
@@ -465,5 +465,7 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 1. 首先需要在vue-cli项目中配置bootstrap,jquery
 2. 然后新建vue文件,如index.vue，index.vue内容如下
 3. 配置路由即可运行实现。
+
+由于代码被解析，暂时没办法展示，只能上传文件（代码文件在 note1/代码/page.vue）;
 
 
