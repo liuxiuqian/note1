@@ -5,6 +5,7 @@
 3. 配置开发版跨域问题
 4. 设置页面title
 5. 分页处理数据
+6. axios上传文件
 
 
 
@@ -468,4 +469,32 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 
 由于代码被解析，暂时没办法展示，只能上传文件（代码文件在 note1/代码/page.vue）;
 
+
+## 6、axios上传文件
+仿照form表单实现上传文件不刷新页面。
+
+html部分：
+
+    
+    <input class="file" id="file"  name="file" type="file" @change="update" accept="a
+
+methods部分：
+
+
+     update(e){
+    let file = e.target.files[0];
+    let param = new FormData(); //创建form对象
+    param.append('file',file,file.name);//通过append向form对象添加数据
+    param.append('chunk','0');//添加form表单中其他数据
+    console.log(param.get('file')); //FormData私有类对象，访问不到，可以通过get判断值是否传进去
+    let config = {
+      headers:{'Content-Type':'multipart/form-data'}
+    };  //添加请求头
+    this.$http.post(api.impfile,param,config)
+      .then(response=>{
+    console.log(response.data);
+      }).catch(function () {
+    
+      })
+      }
 
