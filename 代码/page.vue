@@ -56,7 +56,7 @@
                   <span v-if="item==pageCount&&item>showPageEnd+1" class="btn btn-default disabled">
                       ...
                   </span>
-                  <span v-if="item==pageCount" class="btn btn-default" v-on:click="showPage(item,$event)"  >
+                  <span v-if="item>1&&item==pageCount" class="btn btn-default" v-on:click="showPage(item,$event)"  >
                       {{item}}
                   </span>
                   <span v-if="item==pageCount" class="btn btn-default" v-on:click="showPage(pageCurrent+1,$event)" :class="{'disabled':lDisabled}">
@@ -111,7 +111,6 @@
     },
     methods:{
       showPage(pageIndex, $event, forceRefresh){
-
         if (pageIndex > 0) {
           if (pageIndex > this.pageCount) {
             pageIndex = this.pageCount;
@@ -151,7 +150,9 @@
           //如果当前页首页或者尾页，则上一页首页就不能点击，下一页尾页就不能点击
           if(this.pageCurrent===1){
             this.fDisabled=true;
+            this.lDisabled=true;
           }else if(this.pageCurrent===this.pageCount){
+            this.fDisabled=false;
             this.lDisabled=true;
           }else{
             this.fDisabled=false;
