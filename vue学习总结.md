@@ -6,6 +6,7 @@
 4. 设置页面title
 5. 分页处理数据
 6. axios上传文件
+7. axios 利用ecs6 Promise实现同步操作
 
 
 
@@ -498,3 +499,29 @@ methods部分：
       })
       }
 
+
+## 7、axios 利用ecs6 Promise实现同步操作
+Promise是一个构造函数，自己身上有all、reject、resolve这几个眼熟的方法，原型上有then、catch等同样很眼熟的方法。这么说用Promise new出来的对象肯定就有then、catch方法
+
+#### 1、new一个Promise
+    
+    var p = new Promise(function(resolve, reject){
+	    //做一些异步操作
+	    setTimeout(function(){
+	    console.log('执行完成');
+	    	resolve('随便什么数据');
+	    }, 2000);
+
+		//这里可以写axios请求
+    });
+    
+Promise的构造函数接收一个参数，是函数，并且传入两个参数：resolve，reject，分别表示异步操作执行成功后的回调函数和异步操作执行失败后的回调函数。其实这里用“成功”和“失败”来描述并不准确，按照标准来讲，resolve是将Promise的状态置为fullfiled，reject是将Promise的状态置为rejected。不过在我们开始阶段可以先这么理解
+
+在上面的代码中，我们执行了一个异步操作，也就是setTimeout，2秒后，输出“执行完成”，并且调用resolve方法。
+
+eturn出Promise对象，也就是说，执行这个函数我们得到了一个Promise对象。还记得Promise对象上有then、catch方法吧？这就是强大之处了，看下面的代码：
+
+    p.then(function(data){
+   		console.log(data);
+		//这里写数据处理
+    }).catch(function(）{});

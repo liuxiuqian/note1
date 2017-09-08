@@ -149,8 +149,12 @@
           this.arrayData = newPageInfo;
           //如果当前页首页或者尾页，则上一页首页就不能点击，下一页尾页就不能点击
           if(this.pageCurrent===1){
+            if(this.pageCount ===1){
+              this.lDisabled=true;
+            }else {
+              this.lDisabled=false;
+            }
             this.fDisabled=true;
-            this.lDisabled=true;
           }else if(this.pageCurrent===this.pageCount){
             this.fDisabled=false;
             this.lDisabled=true;
