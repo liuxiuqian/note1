@@ -7,6 +7,7 @@
 5. 分页处理数据
 6. axios上传文件
 7. axios 利用ecs6 Promise实现同步操作
+8. vue实现checkbox全选和反选
 
 
 
@@ -525,3 +526,52 @@ eturn出Promise对象，也就是说，执行这个函数我们得到了一个Pr
    		console.log(data);
 		//这里写数据处理
     }).catch(function(）{});
+
+
+## 8、vue实现checkbox的全选和反选
+
+#### 1、全选checkbox html部分
+    
+    <input type="checkbox" class="checkboxtab" v-model='checked' @click="checkedAll" value=""/>
+v-model绑定选择状态，checkedAll事件下面会讲解。
+
+#### 2、列表checkbox html部分
+
+    <tr v-for="(item,index) in arrayData">
+    	<td><input type="checkbox" class="checkboxtab" v-model="checkboxModel" :value="item.id" /></td>
+    </tr>
+item.id列表的ID值，v-model绑定选择状态选中ID值存在checkboxModel里
+
+#### 3、data数据定义
+
+    checkboxModel:[],//选择列表存储
+    checked:false//全选状态
+
+#### 4、监听列表选择
+
+    watch: {
+      'checkboxModel': {
+	    handler: function (val, oldVal) {
+	      if (this.checkboxModel.length === this.arrayData.length) {
+	    	this.checked=true;
+	      }else{
+	    	this.checked=false;
+	      }
+	    },
+      }
+
+arrayData为列表数据数组，
+
+#### 5、全选事件
+
+    checkedAll: function() {
+	    var _this = this
+	    if(_this.checked){
+	      _this.checkboxModel = [];
+	      _this.arrayData.forEach(function(item) {
+	    	_this.checkboxModel.push(item.id);
+	      });
+	    }else {
+	      _this.checkboxModel = [];
+    }
+当全选选中是遍历数据数组中的id，否则清除checkboxModel。
