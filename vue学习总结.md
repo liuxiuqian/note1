@@ -377,7 +377,7 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
     // http request 拦截器
     axios.interceptors.request.use(
     config => {
-      if(config.method  === 'post'){
+      if(config.method  === 'post'){//application/x-www-form-urlencoded格式使用
     config.data = qs.stringify(config.data);
       }
       if (store.state.token) {
@@ -412,6 +412,8 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
     export default axios;
 
 接口请求的配置，发送拦截和接收拦截。
+
+qs.stringify(config.data);只使用于application/x-www-form-urlencoded格式，其他格式不要添加
 
 
 ## 3、配置开发版跨域问题
