@@ -2,6 +2,6 @@
 1. 搭建node+express+MySQL项目环境
 2. 
 
-## 1、de+express+MySQL项目环境
+## 1、 node+express+MySQL项目环境
 
   
