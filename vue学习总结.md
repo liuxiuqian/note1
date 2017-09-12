@@ -274,7 +274,17 @@ Vuex 应用的状态 state 都应当存放在 store.js 里面，Vue 组件可以
 
 ##### 2、vuex（状态管理器）配置
 
+安装引入vuex
+
+    cnpm install vuex -S
+
+在src目录下新建vuex目录 然后创建store.js 和 types.js,创建完成后在main.js引入
+
+    import store from './vuex/store'
+
 ###### （1）store.js配置
+
+
 
     /**
      * Created by 风信子 on 1/9/17
