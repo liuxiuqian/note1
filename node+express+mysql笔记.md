@@ -35,12 +35,320 @@
 
     npm start //启动服务器
 
+### 2、配置相关文件（自己的思路配置的，如果不合理提出宝贵意见）
+先看以下目录情况
+
+![Alt text](https://raw.githubusercontent.com/liuxiuqian/note1/master/img/node1.png)
+
+
+#### 1.数据库配置文件
+
+在根目录下创建config文件夹然后创建db.js文件
+
+    /**
+     * Created by 风信子 on 2017/9/10.
+     */
+    var mysql = require("mysql");
+    var pool = mysql.createPool({
+      host:"localhost",
+      user:"root",
+      password:"root",
+      database:"lxq",//数据库表明
+      port:3306
+    });
+    function query(sql, callback) {
+      pool.getConnection(function (err, connection) {
+    // Use the connection
+    connection.query(sql, function (err, rows) {
+      callback(err, rows);
+      connection.release();//释放链接
+    });
+      });
+    }
+    
+    
+    exports.query = query;
+
+#### 2.创建接口文件（在根目录下创建dao文件夹）
+
+
+##### 1.创建userDao.js（用户信息相关接口中转文件）
+
+    /**
+     * Created by 风信子 on 2017/9/10.
+     */
+    //用户数据操作
+    var login = require("./login");
+    var regist = require("./regist");
+    var updatapwd = require("./updatapwd");
+    
+    //调用登录方法
+    var loginDo = function(req,callback){
+	    login.login(req,function(res){
+	    	callback(res);
+	    });
+    }
+    
+    //调用注册方法
+    var registDo = function(req,callback){
+	    regist.regist(req,function(res){
+	    	callback(res);
+	    });
+    }
+    
+    //调用修改密码方法
+    var updatapwdDo = function(req,callback){
+      updatapwd.updatapwd(req,function(res){
+    	callback(res);
+      });
+    }
+    
+    
+    exports.login = loginDo;
+    exports.regist = registDo;
+    exports.updatapwd = updatapwdDo;
+
+##### 2.登录接口
+
+    /**
+     * Created by 风信子 on 2017/9/10.
+     */
+    //登录
+    var db = require("../config/db");//请求我们的数据库连接
+    
+    var login = function(req,callback){
+	    var data = {};
+	    var username = req.query.username;
+	    var password = req.query.password;
+		    db.query('select * from user where uname = "'+username+'";',function(error,rows,fields){//sql查询
+			    if(req.session.user){
+				    data.code = "0";
+				    data.message = "登录成功！";
+				    callback(data);
+			    }else {
+				    if(rows.length == 0){
+				    data.code = "1";
+				    data.message = "用户名不存在！";
+				    callback(data);
+			    }else{
+				    if(rows[0].pwd == password){
+					    req.session.user = rows[0].uid;
+					    data.code = "0";
+					    data.message = "登录成功！";
+					    callback(data);
+				    }else{
+					    data.code = "-1";
+					    data.message = "密码错误！";
+					    callback(data);
+				    }
+			    }
+		    }
+	    });
+    }
+    
+    exports.login = login;//对外提供我们的login方法。
+
+#####　3.注册接口
 
 
 
+#####　4.修改密码接口
 
+
+#####  5.routes下配置接口请求 users.js
+
+    var express = require('express');
+    var router = express.Router();
+    
+    
+    var userDao = require('../dao/userDao');//请求我们的数据处理包
+    
+    //登录
+    router.get('/login', function(req, res,callback) {
+	    userDao.login(req,function(result){//回调函数
+	    	res.json(result);
+	    });
+    });
+    
+    //注册
+    router.post('/regist', function(req, res,callback) {
+	    userDao.regist(req,function(result){
+	    	res.json(result);
+	    });
+    });
+    
+    //修改密码
+    router.post('/updatapwd',function (req, res,callback) {
+      userDao.updatapwd(req,function(result){
+    	res.json(result);
+      });
+    })
+    
+    
+    module.exports = router;
+
+在app.js中引入users.js
+
+在index下插入
+
+    var index = require('./routes/index');
+    var users = require('./routes/users');
+
+    
+    app.use('/', index);
+    app.use('/users', users);
 
 ## 2、登录拦截判断登录态
+
+### 1、安装依赖
+    
+    npm install express-session
+
+### 2、引入和配置
+
+头部引入
+    
+    var session = require('express-session');
+    
+配置
+    
+    app.use(logger('dev'));
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(cookieParser("fengxinzi"));//和secret保持一致
+    app.use(express.static(path.join(__dirname, 'public')));
+
+	//这里是配置开始
+    app.use(session({
+    name: "skey",
+    secret: 'fengxinzi', // 用来对session id相关的cookie进行签名
+    store: new FileStore(), // 本地存储session（文本文件，也可以选择其他store，比如redis的）
+    saveUninitialized: false, // 是否自动保存未初始化的会话，建议false
+    resave: false, // 是否每次都重新保存会话，建议false
+    cookie: {
+      maxAge:  1000 * 60 * 60 *24 // 24 hours
+    // maxAge:  1000 * 10
+    }
+    }));
+
+
+### 3、中间件判断是否已登录拦截
+
+    //中间件判断是否已登录
+    app.use(function (req, res, next) {
+	    if (req.session.user) {  // 判断用户是否登录
+	    	next();
+	    } else {
+		    // 解析用户请求的路径
+		    var arr = req.url.split('/');
+		    // 去除 GET 请求路径上携带的参数
+		    for (var i = 0, length = arr.length; i < length; i++) {
+		    arr[i] = arr[i].split('?')[0];
+		    }
+		    // 判断请求路径是否为根、登录、注册、登出，如果是不做拦截
+		    if (arr.length > 1 && arr[1] == '') {
+		    	next();
+		    } else if (arr.length > 2 && arr[1] == 'users' && (arr[2] == 'regist' || arr[2] == 'login' || arr[2] == 'logout')) {
+		    	next();
+		    } else {  // 登录拦截
+		    //拦截返回401
+		    return res.sendStatus(401);
+		    }
+	    }
+    });
+
+
+### 4、完整的app.js代码  方便参考引入位置
+
+    var express = require('express');
+    var path = require('path');
+    var favicon = require('serve-favicon');
+    var logger = require('morgan');
+    var cookieParser = require('cookie-parser');
+    var bodyParser = require('body-parser');
+    var session = require('express-session');
+    var FileStore = require('session-file-store')(session);
+    
+    
+    var index = require('./routes/index');
+    var users = require('./routes/users');
+    
+    
+    var app = express();
+    
+    // view engine setup
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'ejs');
+    
+    // uncomment after placing your favicon in /public
+    //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+    app.use(logger('dev'));
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(cookieParser("fengxinzi"));
+    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(session({
+    name: "skey",
+    secret: 'fengxinzi', // 用来对session id相关的cookie进行签名
+    store: new FileStore(), // 本地存储session（文本文件，也可以选择其他store，比如redis的）
+    saveUninitialized: false, // 是否自动保存未初始化的会话，建议false
+    resave: false, // 是否每次都重新保存会话，建议false
+    cookie: {
+      maxAge:  1000 * 60 * 60 *24 // 24 hours
+    // maxAge:  1000 * 10
+    }
+    }));
+    
+    //中间件判断是否已登录
+    app.use(function (req, res, next) {
+    if (req.session.user) {  // 判断用户是否登录
+    next();
+    } else {
+    // 解析用户请求的路径
+    var arr = req.url.split('/');
+    // 去除 GET 请求路径上携带的参数
+    for (var i = 0, length = arr.length; i < length; i++) {
+    arr[i] = arr[i].split('?')[0];
+    }
+    // 判断请求路径是否为根、登录、注册、登出，如果是不做拦截
+    if (arr.length > 1 && arr[1] == '') {
+    next();
+    } else if (arr.length > 2 && arr[1] == 'users' && (arr[2] == 'regist' || arr[2] == 'login' || arr[2] == 'logout')) {
+    next();
+    } else {  // 登录拦截
+    //拦截返回401
+    return res.sendStatus(401);
+    }
+    }
+    });
+    
+    
+    
+    app.use('/', index);
+    app.use('/users', users);
+    
+    
+    // catch 404 and forward to error handler
+    app.use(function(req, res, next) {
+      var err = new Error('Not Found');
+      err.status = 404;
+      next(err);
+    });
+    
+    // error handler
+    app.use(function(err, req, res, next) {
+      // set locals, only providing error in development
+      res.locals.message = err.message;
+      res.locals.error = req.app.get('env') === 'development' ? err : {};
+    
+      // render the error page
+      res.status(err.status || 500);
+      res.render('error');
+    });
+    
+    
+    module.exports = app;
+    
 
 
 ## 3、 nodejs 自动重启服务 supervisor
