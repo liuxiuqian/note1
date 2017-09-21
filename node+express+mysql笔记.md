@@ -3,6 +3,7 @@
 2. 登录拦截判断登录态
 3. nodejs 自动重启服务 supervisor
 4. crypto加密模块
+5. nodemailer发送邮件
 
 ## 1、 node+express+MySQL项目环境(前后端分离开发)
 
@@ -430,3 +431,51 @@
     var crypto = require("../config/crypto");//加密引用
     
     var password = crypto.getEncAse192(req.body.password,"fengxinzi");//加密调用
+
+## 5、nodemailer发送邮件
+
+安装nodemailer
+
+    npm install nodemailer --save
+
+在配置文件夹（config）下创建nodemailer.js
+    
+    /**
+     * Created by 风信子 on 2017/9/20.
+     */
+    
+    var nodemailer = require('nodemailer');
+    //配置邮件
+    var transporter = nodemailer.createTransport({
+      host: "smtp.qq.com",
+      secureConnection: true,
+      port:465,
+      auth: {
+	    user: '3531720046@qq.com',
+	    pass: '*********',//授权码
+      }
+    });
+    //发送邮件
+    var sendmail = function(email,html){
+      var option = {
+	    from:"3531720046@qq.com",
+	    to:email//多个可以用,隔开
+      }
+      option.subject = '风信子发送的验证码';//标题
+      option.html= html;//内容
+      transporter.sendMail(option, function(error, response){
+	    if(error){
+	      console.log("fail: " + error);
+	    }else{
+	      console.log("success: " + response);
+	    }
+      });
+    }
+    //外部调用发送邮件入口
+    exports.sendmail = sendmail;
+
+使用方法
+
+    var nodemailer = require("../config/nodemailer");//邮箱发送
+    
+    nodemailer.sendmail("1553671542@qq.com","邮件内容：<br/>你的验证码是236987<br/>这是来自nodemailer发送的邮件！")
