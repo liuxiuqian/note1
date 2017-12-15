@@ -1,6 +1,7 @@
 ﻿## 目录
 
 1、React 组件之间交流
+2、this.setState层级过深无法无法改变值问题
 
 
 
@@ -49,3 +50,47 @@ React 组件之间交流的方式，可以分为以下 3 种：
 	  }
 	}
 	module.exports = ProductBox;
+
+
+### 2、【子组件】向【父组件】传值
+
+
+
+
+
+## 2、this.setState层级过深无法无法改变值问题
+
+
+数据样例
+
+    this.state={
+            nav : [{
+                title:"运营总览",
+                img:menu_overview,
+                imgShow:menu_overview_new,
+                isShow : false,
+                menuData:[{
+                    navTop:"热门内容",
+                    navContent:["重点产品攻坚日报","重点产品攻坚日报","重点产品攻坚月考核"],
+                },{
+                    navTop:"基础业务",
+                    navContent:["运营概况"],
+                },{
+                    navTop:"创新业务",
+                    navContent:["渠道毛利"],
+                }]
+            }]
+        }
+
+改变isShow的值
+
+    let isShowData = this.state.nav[0];//将nav数组的第一个值给isShowData
+	isShowData.isShow = true;//将true值赋给isShowData.isShow
+    this.setState({isShowData});//改变isShowData，即改变了isShow的值
+
+
+
+
+
+
+
