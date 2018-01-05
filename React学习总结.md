@@ -2,6 +2,7 @@
 
 1、React 组件之间交流
 2、this.setState层级过深无法无法改变值问题
+3、关于this.setState异步执行问题
 
 
 
@@ -89,8 +90,14 @@ React 组件之间交流的方式，可以分为以下 3 种：
     this.setState({isShowData});//改变isShowData，即改变了isShow的值
 
 
+## 3、关于this.setState异步执行问题
 
+用this.setState的第二参数，给一个回调来在更新后执行
 
+    this.setState({unitLevel:useUnit},()=>{
+        console.log(this.state.unitLevel);
+    });
 
+由于this.setState是异步执行，在我们设置后并不能立刻获取到最新的数据，可以通过回调函数的形式获取最新的数据，setState的第二个参数就是回调函数，这样就可以保证获取的数据是最新的。
 
 
